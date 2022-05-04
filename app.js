@@ -10,14 +10,17 @@ export default function app(req, res) {
   req.on('end', () => {
     if (req.url === '/') {
       successHandler({ res, data: 'Hello World' })
+      return
     } if (req.method === 'OPTIONS') {
       successHandler({ res, data: 'Hello World' })
-    } else if (req.url === '/posts' && req.method === 'GET') {
+      return
+    } if (req.url === '/posts' && req.method === 'GET') {
       postsController.getPosts(req, res)
-    } else if (req.url === '/posts' && req.method === 'POST') {
+      return
+    } if (req.url === '/posts' && req.method === 'POST') {
       postsController.addPosts(req, res)
-    } else {
-      errorHandler({ res, statusCode: 404 })
+      return
     }
+    errorHandler({ res, statusCode: 404 })
   })
 }
