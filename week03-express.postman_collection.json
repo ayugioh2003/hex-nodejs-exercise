@@ -1,24 +1,25 @@
 {
 	"info": {
-		"_postman_id": "ef52e677-ca3c-4892-a378-648500982ef3",
-		"name": "week02-posts",
+		"_postman_id": "ec8c0533-fa9e-445a-8f3b-d3c8f0ef8765",
+		"name": "week03-express",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "/",
+			"name": "/posts",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/",
+					"raw": "http://localhost:3000/api/posts",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						""
+						"api",
+						"posts"
 					]
 				}
 			},
@@ -39,24 +40,17 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/posts",
+					"raw": "http://localhost:3000/api/posts",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
+						"api",
 						"posts"
 					]
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "New Request",
-			"request": {
-				"method": "GET",
-				"header": []
 			},
 			"response": []
 		}

@@ -10,7 +10,7 @@ export default {
     try {
       console.log('req.body', req.body)
 
-      const body = JSON.parse(req.body)
+      const { body } = req
       const postRes = await Post.create(body)
       console.log('postRes', postRes)
 

@@ -1,26 +1,29 @@
+import express from 'express'
+import morgan from 'morgan'
+import cors from 'cors'
+// import postRouter from './router/posts.js'
+import router from './router/index.js'
 import { successHandler, errorHandler } from './utils/responseHandler.js'
-import postsController from './controllers/posts.js'
 
-export default function app(req, res) {
-  req.body = ''
-  req.on('data', (chunk) => {
-    req.body += chunk
-  })
+const app = express()
 
-  req.on('end', () => {
-    if (req.url === '/') {
-      successHandler({ res, data: 'Hello World' })
-      return
-    } if (req.method === 'OPTIONS') {
-      successHandler({ res, data: 'Hello World' })
-      return
-    } if (req.url === '/posts' && req.method === 'GET') {
-      postsController.getPosts(req, res)
-      return
-    } if (req.url === '/posts' && req.method === 'POST') {
-      postsController.addPosts(req, res)
-      return
-    }
-    errorHandler({ res, statusCode: 404 })
+// middleware
+app.use(morgan('dev')) // 日誌
+app.use(express.json()) // 接收 body 為 json 格式資料
+app.use(express.urlencoded({ extended: true })) // url-form-encoded
+app.use(cors()) // 跨域
+
+// routes
+
+app.get('/', (req, res) => {
+  res.status(200).json({
+    name: '洧杰',
   })
-}
+})
+app.use('/api/posts', router.postRouter)
+
+app.use('*', (req, res) => {
+  errorHandler({ res, statusCode: 404 })
+})
+
+export default app
