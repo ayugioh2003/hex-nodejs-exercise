@@ -1,9 +1,10 @@
 import mongoose from 'mongoose'
 
 const postsSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, '貼文姓名未填寫'],
+  user: {
+    type: mongoose.Schema.ObjectId,
+    required: [true, '作者 id 未填寫'],
+    ref: 'users',
   },
   tags: [
     {
