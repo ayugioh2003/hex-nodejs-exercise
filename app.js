@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
   })
 })
 app.use('/api/posts', router.postRouter)
+app.use('/api/users', router.userRouter)
 
 app.use('*', (req, res) => {
   errorHandler({ res, statusCode: 404 })
