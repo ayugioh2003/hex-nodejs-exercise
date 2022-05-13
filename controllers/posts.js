@@ -10,8 +10,6 @@ export default {
   // POST /posts
   async addPost(req, res) {
     try {
-      console.log('req.body', req.body)
-
       const {
         content, ...otherData
       } = JSON.parse(req.body)
@@ -31,8 +29,6 @@ export default {
   // PATCH /posts/:id
   async updatePost(req, res) {
     try {
-      console.log('req.body', req.body)
-
       const { content, ...otherData } = JSON.parse(req.body)
       if (!content) {
         errorHandler({ res, statusCode: 400, message: 'content is required' })
@@ -55,7 +51,7 @@ export default {
       return successHandler({ res, data: post })
     } catch (error) {
       return errorHandler({
-        res, statusCode: 400, message: req.url, error: error.message,
+        res, statusCode: 400, error: error.message,
       })
     }
   },
