@@ -38,7 +38,8 @@ export default {
         errorHandler({ res, statusCode: 400, message: 'content is required' })
       }
 
-      const id = req.url.split('/').at(-1)
+      console.log('req.url', req.url)
+      const id = req.url.split('/posts/').at(-1)
       const post = await Post.findByIdAndUpdate(id, { content, ...otherData }, { returnDocument: 'after' })
 
       if (!id || !post) {
