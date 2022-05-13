@@ -39,7 +39,7 @@ export default {
       }
 
       console.log('req.url', req.url)
-      const id = req.url.split('/posts/').at(-1)
+      const id = req.url.split('/posts/')[1]
       const post = await Post.findByIdAndUpdate(id, { content, ...otherData }, { returnDocument: 'after' })
 
       if (!id || !post) {
