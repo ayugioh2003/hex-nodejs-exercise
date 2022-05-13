@@ -13,7 +13,7 @@ export default {
       console.log('req.body', req.body)
 
       const {
-        content, name, type, ...otherData
+        content, ...otherData
       } = JSON.parse(req.body)
       if (!content) {
         errorHandler({ res, statusCode: 400, message: '內容不得為空' })
