@@ -18,7 +18,16 @@ export default function app(req, res) {
       postsController.getPosts(req, res)
       return
     } if (req.url === '/posts' && req.method === 'POST') {
-      postsController.addPosts(req, res)
+      postsController.addPost(req, res)
+      return
+    } if (req.url.includes('/posts/') && req.method === 'PATCH') {
+      postsController.updatePost(req, res)
+      return
+    } if (req.url.includes('/posts/') && req.method === 'DELETE') {
+      postsController.deletePost(req, res)
+      return
+    } if (req.url === '/posts' && req.method === 'DELETE') {
+      postsController.deletePosts(req, res)
       return
     }
     errorHandler({ res, statusCode: 404 })
