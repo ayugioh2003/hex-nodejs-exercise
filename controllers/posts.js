@@ -63,7 +63,7 @@ export default {
   // DELETE /posts/:id
   async deletePost(req, res) {
     try {
-      const id = req.url.split('/').at(-1)
+      const id = req.url.split('/posts/')[1]
       const data = await Post.findByIdAndDelete(id)
 
       if (!id || !data) {
