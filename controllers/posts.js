@@ -54,7 +54,9 @@ export default {
 
       return successHandler({ res, data: post })
     } catch (error) {
-      return errorHandler({ res, statusCode: 400, error: error.message })
+      return errorHandler({
+        res, statusCode: 400, message: req.url, error: error.message,
+      })
     }
   },
 
