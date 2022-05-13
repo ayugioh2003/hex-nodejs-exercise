@@ -6,19 +6,17 @@
 	},
 	"item": [
 		{
-			"name": "/",
+			"name": "/posts",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/",
-					"protocol": "http",
+					"raw": "{{week02-API}}/posts",
 					"host": [
-						"localhost"
+						"{{week02-API}}"
 					],
-					"port": "3000",
 					"path": [
-						""
+						"posts"
 					]
 				}
 			},
@@ -39,12 +37,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/posts",
-					"protocol": "http",
+					"raw": "{{week02-API}}/posts",
 					"host": [
-						"localhost"
+						"{{week02-API}}"
 					],
-					"port": "3000",
 					"path": [
 						"posts"
 					]
@@ -53,10 +49,94 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "/posts/:id",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"我的耳朵呢 222\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{week02-API}}/posts/:id",
+					"host": [
+						"{{week02-API}}"
+					],
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "627e84d67f5c1bc4ccab98a9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/posts/ :id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"我的耳朵呢 RRR\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{week02-API}}/posts/:id",
+					"host": [
+						"{{week02-API}}"
+					],
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "627e84d67f5c1bc4ccab98a9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/posts",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"我的耳朵呢 RRR\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{week02-API}}/posts",
+					"host": [
+						"{{week02-API}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
 			},
 			"response": []
 		}
