@@ -10,19 +10,17 @@ export default {
   // POST /posts
   async addPost(req, res) {
     try {
-      const {
-        content, ...otherData
-      } = JSON.parse(req.body)
+      const { content, ...otherData } = JSON.parse(req.body)
       if (!content) {
-        errorHandler({ res, statusCode: 400, message: '內容不得為空' })
+        return errorHandler({ res, statusCode: 400, message: '內容不得為空' })
       }
 
       const postRes = await Post.create({ content, ...otherData })
       console.log('postRes', postRes)
 
-      successHandler({ res, data: postRes })
+      return successHandler({ res, data: postRes })
     } catch (error) {
-      errorHandler({ res, statusCode: 400, error: error.message })
+      return errorHandler({ res, statusCode: 400, error: error.message })
     }
   },
 
@@ -31,12 +29,16 @@ export default {
     try {
       const { content, ...otherData } = JSON.parse(req.body)
       if (!content) {
-        errorHandler({ res, statusCode: 400, message: 'content is required' })
+        return errorHandler({ res, statusCode: 400, message: 'content is required' })
       }
 
       console.log('req.url', req.url)
       const id = req.url.split('/posts/')[1]
-      const post = await Post.findByIdAndUpdate(id, { content, ...otherData }, { returnDocument: 'after' })
+      const post = await Post.findByIdAndUpdate(
+        id,
+        { content, ...otherData },
+        { returnDocument: 'after', runValidators: true },
+      )
 
       if (!id || !post) {
         return errorHandler({
@@ -51,7 +53,9 @@ export default {
       return successHandler({ res, data: post })
     } catch (error) {
       return errorHandler({
-        res, statusCode: 400, error: error.message,
+        res,
+        statusCode: 400,
+        error: error.message,
       })
     }
   },
