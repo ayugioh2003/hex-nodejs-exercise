@@ -32,6 +32,7 @@ export const successHandler = ({
 export const errorHandler = ({
   res, statusCode = 404, message, error,
 }) => {
+  console.error(error)
   res.writeHead(statusCode, header)
   res.end(
     JSON.stringify({

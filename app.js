@@ -3,7 +3,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 // import postRouter from './router/posts.js'
 import router from './router/index.js'
-import { successHandler, errorHandler } from './utils/responseHandler.js'
+import { errorHandler } from './utils/responseHandler.js'
 
 const app = express()
 
@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 })
 app.use('/api/posts', router.postRouter)
 app.use('/api/users', router.userRouter)
+app.use('/api/upload', router.uploadRouter)
 
 app.use('*', (req, res) => {
   errorHandler({ res, statusCode: 404 })
