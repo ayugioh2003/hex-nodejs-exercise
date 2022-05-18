@@ -1,0 +1,318 @@
+{
+	"info": {
+		"_postman_id": "40794507-a454-4fe3-b625-cd7c13cec6af",
+		"name": "week04-fullstack",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "/posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{week04-API}}/api/posts?q=&sort=oldest",
+							"host": [
+								"{{week04-API}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "",
+									"description": "關鍵字"
+								},
+								{
+									"key": "sort",
+									"value": "oldest",
+									"description": "時間排序 latest, oldest"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/posts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_id",
+									"value": "6274947248229b33fe081573",
+									"description": "輸入 user_id，不填入預設抓第一個人的 user_id",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "content",
+									"value": "hello world7",
+									"description": "必填",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "person",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{week04-API}}/api/posts",
+							"host": [
+								"{{week04-API}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/posts/:id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"我的耳朵呢 333\",\n    \"image\": \"https://i.imgur.com/vbZfbpM.jpeg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week04-API}}/api/posts/:id",
+							"host": [
+								"{{week04-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6284692cec58e58f301f7c84"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/posts/ :id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"我的耳朵呢 RRR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week04-API}}/api/posts/:id",
+							"host": [
+								"{{week04-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "628463a37d842b7127eb8561"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/posts",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"我的耳朵呢 RRR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week04-API}}/api/posts",
+							"host": [
+								"{{week04-API}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "/uesrs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{week04-API}}/api/users",
+							"host": [
+								"{{week04-API}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "ddd@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "ddd",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ddd",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "ddd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{week04-API}}/api/users",
+							"host": [
+								"{{week04-API}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "upload",
+			"item": [
+				{
+					"name": "/images",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{week04-API}}/api/upload/images",
+							"host": [
+								"{{week04-API}}"
+							],
+							"path": [
+								"api",
+								"upload",
+								"images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "download.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{week04-API}}/api/upload/image",
+							"host": [
+								"{{week04-API}}"
+							],
+							"path": [
+								"api",
+								"upload",
+								"image"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
