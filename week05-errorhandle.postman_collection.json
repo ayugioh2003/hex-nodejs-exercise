@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "40794507-a454-4fe3-b625-cd7c13cec6af",
-		"name": "week04-fullstack",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "da70dc68-5bba-40de-9a10-d7d16738a6a0",
+		"name": "week05-errorhandle",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9637148"
 	},
 	"item": [
 		{
@@ -21,9 +22,9 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "{{week04-API}}/api/posts?q=&sort=oldest",
+							"raw": "{{week05-API}}/api/posts?q=&sort=oldest",
 							"host": [
-								"{{week04-API}}"
+								"{{week05-API}}"
 							],
 							"path": [
 								"api",
@@ -32,13 +33,11 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "",
-									"description": "關鍵字"
+									"value": ""
 								},
 								{
 									"key": "sort",
-									"value": "oldest",
-									"description": "時間排序 latest, oldest"
+									"value": "oldest"
 								}
 							]
 						}
@@ -79,9 +78,9 @@
 							]
 						},
 						"url": {
-							"raw": "{{week04-API}}/api/posts",
+							"raw": "{{week05-API}}/api/posts",
 							"host": [
-								"{{week04-API}}"
+								"{{week05-API}}"
 							],
 							"path": [
 								"api",
@@ -98,7 +97,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"content\": \"我的耳朵呢 333\",\n    \"image\": \"https://i.imgur.com/vbZfbpM.jpeg\"\n}",
+							"raw": "{\n    \"content\": \"123\",\n    \"image\": \"https://i.imgur.com/vbZfbpM.jpeg\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -106,9 +105,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{week04-API}}/api/posts/:id",
+							"raw": "{{week05-API}}/api/posts/:id",
 							"host": [
-								"{{week04-API}}"
+								"{{week05-API}}"
 							],
 							"path": [
 								"api",
@@ -118,7 +117,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "6284692cec58e58f301f7c84"
+									"value": "628afd30c7c935d6025a4781"
 								}
 							]
 						}
@@ -140,9 +139,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{week04-API}}/api/posts/:id",
+							"raw": "{{week05-API}}/api/posts/:id",
 							"host": [
-								"{{week04-API}}"
+								"{{week05-API}}"
 							],
 							"path": [
 								"api",
@@ -152,7 +151,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "628463a37d842b7127eb8561"
+									"value": "628afd79c7c935d6025a478c"
 								}
 							]
 						}
@@ -174,13 +173,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{week04-API}}/api/posts",
+							"raw": "{{week05-API}}/api/posts/",
 							"host": [
-								"{{week04-API}}"
+								"{{week05-API}}"
 							],
 							"path": [
 								"api",
-								"posts"
+								"posts",
+								""
 							]
 						}
 					},
@@ -204,9 +204,9 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "{{week04-API}}/api/users",
+							"raw": "{{week05-API}}/api/users",
 							"host": [
-								"{{week04-API}}"
+								"{{week05-API}}"
 							],
 							"path": [
 								"api",
@@ -226,30 +226,30 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "ddd@gmail.com",
+									"value": "hhh@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "name",
-									"value": "ddd",
+									"value": "hhh",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "ddd",
+									"value": "hhh",
 									"type": "text"
 								},
 								{
 									"key": "photo",
-									"value": "ddd",
+									"value": "hhh",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{week04-API}}/api/users",
+							"raw": "{{week05-API}}/api/users",
 							"host": [
-								"{{week04-API}}"
+								"{{week05-API}}"
 							],
 							"path": [
 								"api",
@@ -270,9 +270,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{week04-API}}/api/upload/images",
+							"raw": "{{week05-API}}/api/upload/images",
 							"host": [
-								"{{week04-API}}"
+								"{{week05-API}}"
 							],
 							"path": [
 								"api",
@@ -294,14 +294,14 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "download.jpeg"
+									"src": []
 								}
 							]
 						},
 						"url": {
-							"raw": "{{week04-API}}/api/upload/image",
+							"raw": "{{week05-API}}/api/upload/image",
 							"host": [
-								"{{week04-API}}"
+								"{{week05-API}}"
 							],
 							"path": [
 								"api",
