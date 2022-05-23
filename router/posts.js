@@ -3,24 +3,14 @@ import postsController from '../controller/posts.js'
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
-  postsController.getPosts(req, res)
-})
+router.get('/', postsController.getPosts)
 
-router.post('/', (req, res) => {
-  postsController.addPosts(req, res)
-})
+router.post('/', postsController.addPosts)
 
-router.patch('/:post_id', (req, res) => {
-  postsController.updatePost(req, res)
-})
+router.patch('/:post_id', postsController.updatePost)
 
-router.delete('/:post_id', (req, res) => {
-  postsController.deletePost(req, res)
-})
+router.delete('/:post_id', postsController.deletePost)
 
-router.delete('/', (req, res) => {
-  postsController.deletePosts(req, res)
-})
+router.delete('/', postsController.deletePosts)
 
 export default router

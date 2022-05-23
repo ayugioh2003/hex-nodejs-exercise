@@ -22,7 +22,6 @@ export const successHandler = ({
   res.end(
     JSON.stringify({
       status: 'success',
-      statusCode,
       message: message || statusMessage[statusCode],
       data,
     }),
@@ -37,7 +36,6 @@ export const errorHandler = ({
   res.end(
     JSON.stringify({
       status: 'error',
-      statusCode,
       message: message || statusMessage[statusCode],
       error,
     }),

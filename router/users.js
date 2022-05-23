@@ -3,12 +3,8 @@ import usersController from '../controller/users.js'
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
-  usersController.getUsers(req, res)
-})
+router.get('/', usersController.getUsers)
 
-router.post('/', (req, res) => {
-  usersController.addUsers(req, res)
-})
+router.post('/', usersController.addUser)
 
 export default router

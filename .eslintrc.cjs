@@ -23,5 +23,6 @@ module.exports = {
     quotes: ['error', 'single'], // 單引號
     indent: ['error', 2], // 縮排
     'no-multiple-empty-lines': ['error'], // 允許最大連續斷一行
+    'no-param-reassign': 0, // 賦予 req 值時不會噴錯
   },
 }

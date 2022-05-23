@@ -4,12 +4,8 @@ import imgur from '../service/imgur.js'
 
 const router = express.Router()
 
-router.get('/images', (req, res) => {
-  uploadController.getImages(req, res)
-})
+router.get('/images', uploadController.getImages)
 
-router.post('/image', imgur.uploadModule.single('image'), (req, res) => {
-  uploadController.uploadImage(req, res)
-})
+router.post('/image', imgur.uploadModule.single('image'), uploadController.uploadImage)
 
 export default router

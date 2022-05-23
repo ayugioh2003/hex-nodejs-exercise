@@ -1,22 +1,29 @@
 import { successHandler, errorHandler } from '../utils/responseHandler.js'
 import User from '../model/users.js'
 import '../model/posts.js'
+import catchAsync from '../utils/catchAsync.js'
 
 export default {
-  async getUsers(req, res) {
-    const usersDoc = await User.find().populate('posts').populate('postsCount').exec()
+  // GET /users
+  getUsers: catchAsync(async (req, res) => {
+    const usersDoc = await User.find().populate('posts', 'postsCount').exec()
     successHandler({ res, data: usersDoc })
-  },
-  async addUsers(req, res) {
-    try {
-      const { body } = req
-      const userRes = await User.create(body)
-      const data = JSON.parse(JSON.stringify(userRes))
-      delete data.password
+  }),
+  // POST /users
+  addUser: catchAsync(async (req, res) => {
+    const { body } = req
+    const userRes = await User.create(body)
 
-      successHandler({ res, data })
-    } catch (error) {
-      errorHandler({ res, statusCode: 400, error: error.message })
-    }
-  },
+    successHandler({
+      res,
+      data: {
+        // eslint-disable-next-line no-underscore-dangle
+        _id: userRes._id,
+        email: userRes.email,
+        name: userRes.name,
+        photo: userRes.photo,
+        createdAt: userRes.createdAt,
+      },
+    })
+  }),
 }
