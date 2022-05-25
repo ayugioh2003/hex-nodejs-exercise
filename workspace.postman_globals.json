@@ -1,0 +1,63 @@
+{
+	"id": "baab197e-b629-4e85-8c0e-f1e15d4d697e",
+	"values": [
+		{
+			"key": "metawall-api",
+			"value": "https://metawall-backend.vercel.app/api",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "local",
+			"value": "http://localhost:3000",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "week02-API",
+			"value": "https://hex-nodejs-exercise-git-week02-posts-ayugioh2003.vercel.app/",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "week03-API",
+			"value": "https://hex-nodejs-exercise-git-week03-express-ayugioh2003.vercel.app/",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "week04-API",
+			"value": "https://hex-nodejs-exercise-git-week04-fullstack-ayugioh2003.vercel.app/",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "week05-API",
+			"value": "https://hex-nodejs-exercise-git-week05-errorhandle-ayugioh2003.vercel.app/",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "week06-API",
+			"value": "https://hex-nodejs-exercise-git-week06-jwt-ayugioh2003.vercel.app/",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "accessToken",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "week07-API",
+			"value": "https://hex-nodejs-exercise-git-week07-imgur-ayugioh2003.vercel.app/",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2022-05-25T08:44:40.369Z",
+	"_postman_exported_using": "Postman/9.19.3"
+}

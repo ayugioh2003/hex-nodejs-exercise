@@ -1,0 +1,739 @@
+{
+	"info": {
+		"_postman_id": "68f96fe4-0c81-438f-bfb7-422ae725240a",
+		"name": "week07-imgur",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9637148"
+	},
+	"item": [
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "/posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/posts?q=&sort=oldest",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": ""
+								},
+								{
+									"key": "sort",
+									"value": "oldest"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_id",
+									"value": "6274947248229b33fe081573",
+									"description": "輸入 user_id，不填入預設抓第一個人的 user_id",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "content",
+									"value": "test3",
+									"description": "必填",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "person",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/posts",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/posts/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"123\",\n    \"image\": \"https://i.imgur.com/vbZfbpM.jpeg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/posts/:id",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "628c5a9a0c0e2bcd0fe8e133"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/posts/ :id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"我的耳朵呢 RRR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/posts/:id",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "628b4fb85ee07cf83dded422"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"我的耳朵呢 RRR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/posts",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/posts/:post_id/like",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"toggleType\": \"add\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/posts/:post_id/like",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":post_id",
+								"like"
+							],
+							"variable": [
+								{
+									"key": "post_id",
+									"value": "628de5c1965c199c6bf912f0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/posts/user/:user_id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{week07-API}}/api/posts/user/:user_id",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"user",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "628b4f920624dca3ebc8aac9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/posts/getLikeList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{week07-API}}/api/posts/getLikeList",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"getLikeList"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "/users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/users?id={{accessToken}}",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{accessToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "hhh@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "hhh",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "hhh",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "hhh",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/users",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/sign_up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"dddd@gmail.com\",\n    \"password\": \"dddddddd\",\n    \"confirmPassword\": \"dddddddd\",\n    \"name\": \"dddd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/users/sign_up",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"sign_up"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/sign_in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set('accessToken', pm.response.json().data.user.token)",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"bbbb@gmail.com\",\n    \"password\": \"bbbbbbbb\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/users/sign_in",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"sign_in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/updatePassword",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"bbbb\",\n    \"confirmPassword\": \"bbbb\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/users/updatePassword",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"updatePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/users/profile",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"bbbb\",\n    \"photo\": \"bbbphoto\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/users/profile",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "upload",
+			"item": [
+				{
+					"name": "/images",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{week07-API}}/api/upload/images",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"upload",
+								"images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "download.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/upload/image",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"upload",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/imageToAlbum",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "istockphoto-825383494-612x612.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{week07-API}}/api/upload/imageToAlbum",
+							"host": [
+								"{{week07-API}}"
+							],
+							"path": [
+								"api",
+								"upload",
+								"imageToAlbum"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
