@@ -25,10 +25,12 @@ const postsSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Content 未填寫'],
   },
-  likes: {
-    type: Number,
-    default: 0,
-  },
+  likes: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'users',
+    },
+  ],
   comments: {
     type: Number,
     default: 0,

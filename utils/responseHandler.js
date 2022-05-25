@@ -16,13 +16,14 @@ export const statusMessage = {
 }
 
 export const successHandler = ({
-  res, statusCode = 200, message, data,
+  res, statusCode = 200, message, data, ...otherData
 }) => {
   res.writeHead(statusCode, header)
   res.end(
     JSON.stringify({
       status: 'success',
       message: message || statusMessage[statusCode],
+      ...otherData,
       data,
     }),
   )
