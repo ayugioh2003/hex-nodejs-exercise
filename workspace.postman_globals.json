@@ -48,10 +48,16 @@
 			"value": "",
 			"type": "any",
 			"enabled": true
+		},
+		{
+			"key": "week07-API",
+			"value": "https://hex-nodejs-exercise-git-week07-imgur-ayugioh2003.vercel.app/",
+			"type": "default",
+			"enabled": true
 		}
 	],
 	"name": "Globals",
 	"_postman_variable_scope": "globals",
-	"_postman_exported_at": "2022-05-25T06:24:50.403Z",
+	"_postman_exported_at": "2022-05-25T08:44:40.369Z",
 	"_postman_exported_using": "Postman/9.19.3"
 }
