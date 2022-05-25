@@ -2,8 +2,8 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import router from './router/index.js'
-import { errorHandler } from './utils/responseHandler.js'
 import globalError from './controller/globalError.js'
+import AppError from './utils/appError.js'
 
 const app = express()
 
@@ -46,19 +46,16 @@ app.get('/', (req, res) => {
     name: '洧杰',
   })
 })
-app.use((req, res, next) => {
-  console.log('小夫，我要進來了')
-  next()
-})
 
 app.use('/api/posts', router.postRouter)
 app.use('/api/users', router.userRouter)
 app.use('/api/upload', router.uploadRouter)
 
 // error handle
-app.use('*', (req, res) => {
-  errorHandler({ res, statusCode: 404 })
-})
+app.use('*', (req, res, next) => next(new AppError({
+  statusCode: 404,
+  message: 'Not Found',
+})))
 app.use(globalError)
 
 export default app

@@ -3,7 +3,7 @@ const resErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: 'error',
     message: err.message,
-    errors: [],
+    errors: err.errors,
     error: {
       name: err.name,
       message: err.message,
@@ -18,7 +18,7 @@ const resErrorPro = (err, res) => {
     res.status(err.statusCode).json({
       status: 'error',
       message: err.message, // 給使用者看的錯誤訊息
-      errors: [], // 如果需要客製化多筆 errors
+      errors: err.errors, // 如果需要客製化多筆 errors
     })
   } else {
     console.log('出事了阿伯，這錯誤從哪邊出來的啊')
@@ -37,6 +37,15 @@ export default (err, req, res, next) => {
 
   if (isDev) {
     return resErrorDev(err, res)
+  }
+
+  console.error('err.name', err.name)
+
+  // jwt
+  if (err.name === 'TokenExpiredError') {
+    err.message = '為了資訊安全，網站會定期將使用者登出。請重新登入'
+    err.isOperational = true
+    return resErrorPro(err, res)
   }
 
   // mongoose

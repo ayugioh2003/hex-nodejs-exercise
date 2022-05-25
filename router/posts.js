@@ -1,16 +1,18 @@
 import express from 'express'
 import postsController from '../controller/posts.js'
+// utils
+import { isAuth } from '../service/auth.js'
 
 const router = express.Router()
 
-router.get('/', postsController.getPosts)
+router.get('/', isAuth, postsController.getPosts)
 
-router.post('/', postsController.addPosts)
+router.post('/', isAuth, postsController.addPosts)
 
-router.patch('/:post_id', postsController.updatePost)
+router.patch('/:post_id', isAuth, postsController.updatePost)
 
-router.delete('/:post_id', postsController.deletePost)
+router.delete('/:post_id', isAuth, postsController.deletePost)
 
-router.delete('/', postsController.deletePosts)
+router.delete('/', isAuth, postsController.deletePosts)
 
 export default router

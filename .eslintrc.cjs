@@ -24,5 +24,6 @@ module.exports = {
     indent: ['error', 2], // 縮排
     'no-multiple-empty-lines': ['error'], // 允許最大連續斷一行
     'no-param-reassign': 0, // 賦予 req 值時不會噴錯
+    'no-underscore-dangle': 0, // 可以寫這樣 { id: user._id },
   },
 }

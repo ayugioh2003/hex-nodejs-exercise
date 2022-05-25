@@ -18,6 +18,14 @@ const usersSchema = new mongoose.Schema({
     select: false,
   },
   photo: String,
+  sex: {
+    type: String,
+    enum: ['male', 'female'],
+  },
+  role: {
+    type: String,
+    enum: ['user', 'admin', 'super'],
+  },
 }, {
   versionKey: false,
   timestamps: true,

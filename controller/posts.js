@@ -2,7 +2,6 @@ import { successHandler } from '../utils/responseHandler.js'
 import catchAsync from '../utils/catchAsync.js'
 import AppError from '../utils/appError.js'
 import Post from '../model/posts.js'
-import User from '../model/users.js'
 
 export default {
   // GET /posts
@@ -42,22 +41,13 @@ export default {
       }))
     }
 
-    // 初期測試用，隨便拿一個 user_id 給新增的貼文
-    if (!req.body.user_id) {
-      const userDoc = await User.find().limit(1)
-      const { _id } = userDoc[0]
-      req.body.user_id = _id.toString()
-      console.log('req.body.user', req.body.user_id)
-    }
-
     // 新增貼文
-    const postDoc = await Post.create({ content, ...otherData, user: req.body.user_id })
+    const postDoc = await Post.create({ content, ...otherData, user: req.user.id })
 
     return successHandler({ res, data: postDoc })
   }),
   // PATCH /posts/:id
   updatePost: catchAsync(async (req, res, next) => {
-    console.log('updatePost')
     const { content, ...otherData } = req.body
     if (!content) {
       return next(new AppError({
@@ -68,8 +58,8 @@ export default {
 
     const id = req.params.post_id
 
-    const post = await Post.findByIdAndUpdate(
-      id,
+    const post = await Post.findOneAndUpdate(
+      { id, user: req.user.id },
       { content, ...otherData },
       { returnDocument: 'after', runValidators: true },
     )
@@ -85,7 +75,7 @@ export default {
   // DELETE /posts/:id
   deletePost: catchAsync(async (req, res, next) => {
     const id = req.params.post_id
-    const data = await Post.findByIdAndDelete(id)
+    const data = await Post.findOneAndDelete({ id, user: req.user.id })
 
     if (!id || !data) {
       return next(new AppError({
@@ -96,6 +86,7 @@ export default {
     return successHandler({ res, data, message: '貼文刪除成功' })
   }),
   // DELETE /posts
+  // 測試時使用
   deletePosts: catchAsync(async (req, res, next) => {
     if (req.originalUrl === '/api/posts/') {
       return next(new AppError({
