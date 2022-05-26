@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "68f96fe4-0c81-438f-bfb7-422ae725240a",
-		"name": "week07-imgur",
+		"_postman_id": "c3015248-eeaa-4da8-bc38-3b31c48e9775",
+		"name": "week08-comments",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "9637148"
 	},
@@ -32,9 +32,9 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/posts?q=&sort=oldest",
+							"raw": "{{week08-API}}/api/posts?q=&sort=oldest",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -98,9 +98,9 @@
 							]
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/posts",
+							"raw": "{{week08-API}}/api/posts",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -135,9 +135,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/posts/:id",
+							"raw": "{{week08-API}}/api/posts/:id",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -179,9 +179,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/posts/:id",
+							"raw": "{{week08-API}}/api/posts/:id",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -223,9 +223,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/posts",
+							"raw": "{{week08-API}}/api/posts",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -260,9 +260,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/posts/:post_id/like",
+							"raw": "{{week08-API}}/api/posts/:post_id/like",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -296,9 +296,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{week07-API}}/api/posts/user/:user_id",
+							"raw": "{{week08-API}}/api/posts/user/:user_id",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -332,14 +332,59 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{week07-API}}/api/posts/getLikeList",
+							"raw": "{{week08-API}}/api/posts/getLikeList",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
 								"posts",
 								"getLikeList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/posts/:id/comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\": \"comment test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/posts/:post_id/comment",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":post_id",
+								"comment"
+							],
+							"variable": [
+								{
+									"key": "post_id",
+									"value": "628de493597962feef479fc3"
+								}
 							]
 						}
 					},
@@ -373,9 +418,9 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/users?id={{accessToken}}",
+							"raw": "{{week08-API}}/api/users?id={{accessToken}}",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -432,9 +477,9 @@
 							]
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/users",
+							"raw": "{{week08-API}}/api/users",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -459,9 +504,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/users/sign_up",
+							"raw": "{{week08-API}}/api/users/sign_up",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -506,9 +551,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/users/sign_in",
+							"raw": "{{week08-API}}/api/users/sign_in",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -544,9 +589,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/users/updatePassword",
+							"raw": "{{week08-API}}/api/users/updatePassword",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -580,9 +625,9 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/users/profile",
+							"raw": "{{week08-API}}/api/users/profile",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -618,14 +663,166 @@
 							}
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/users/profile",
+							"raw": "{{week08-API}}/api/users/profile",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
 								"users",
 								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/:user_id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/users/:user_id",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "6274946448229b33fe081571"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/:user_id/follow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"toggleType\": \"add\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/users/:user_id/follow",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":user_id",
+								"follow"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "628b4f920624dca3ebc8aac9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users/followers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{week08-API}}/api/users/followers",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"followers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users/:user_id/followers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{week08-API}}/api/users/:user_id/followers",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":user_id",
+								"followers"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "6274946448229b33fe081571"
+								}
 							]
 						}
 					},
@@ -642,9 +839,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{week07-API}}/api/upload/images",
+							"raw": "{{week08-API}}/api/upload/images",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -681,9 +878,9 @@
 							]
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/upload/image",
+							"raw": "{{week08-API}}/api/upload/image",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",
@@ -720,9 +917,9 @@
 							]
 						},
 						"url": {
-							"raw": "{{week07-API}}/api/upload/imageToAlbum",
+							"raw": "{{week08-API}}/api/upload/imageToAlbum",
 							"host": [
-								"{{week07-API}}"
+								"{{week08-API}}"
 							],
 							"path": [
 								"api",

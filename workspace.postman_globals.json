@@ -54,10 +54,16 @@
 			"value": "https://hex-nodejs-exercise-git-week07-imgur-ayugioh2003.vercel.app/",
 			"type": "default",
 			"enabled": true
+		},
+		{
+			"key": "week08-API",
+			"value": "https://hex-nodejs-exercise-git-week08-comments-ayugioh2003.vercel.app/",
+			"type": "default",
+			"enabled": true
 		}
 	],
 	"name": "Globals",
 	"_postman_variable_scope": "globals",
-	"_postman_exported_at": "2022-05-25T08:44:40.369Z",
+	"_postman_exported_at": "2022-05-26T06:56:42.488Z",
 	"_postman_exported_using": "Postman/9.19.3"
 }
