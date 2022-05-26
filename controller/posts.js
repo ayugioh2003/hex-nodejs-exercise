@@ -1,9 +1,13 @@
 import { successHandler } from '../utils/responseHandler.js'
+// utils
 import catchAsync from '../utils/catchAsync.js'
 import AppError from '../utils/appError.js'
+// models
 import Post from '../model/posts.js'
+import Comment from '../model/comments.js'
 
 export default {
+  // ---------------------------- 貼文 ----------------------------
   // GET /posts
   getPosts: catchAsync(async (req, res) => {
     // 取得資料: 網址列的 query
@@ -19,6 +23,10 @@ export default {
       .populate({
         path: 'likes',
         select: 'name photo',
+      })
+      .populate({
+        path: 'comments',
+        select: 'comment user createdAt',
       })
       .sort(timeSort)
       .exec()
@@ -103,7 +111,7 @@ export default {
     const posts = await Post.find()
     return successHandler({ res, data: posts, message: '全部貼文刪除成功' })
   }),
-  // --- 按讚 ---
+  // ---------------------------- 按讚 ----------------------------
   toggleLike: catchAsync(async (req, res, next) => {
     const { post_id } = req.params
     const { toggleType } = req.body
@@ -141,7 +149,7 @@ export default {
       return successHandler({ res, message: '成功取消讚', data: toggleRes })
     }
   }),
-  // --- 列表 ---
+  // ---------------------------- 列表 ----------------------------
   // GET /posts/user/:post_id
   getUserPosts: catchAsync(async (req, res) => {
     const user = req.params.user_id
@@ -151,6 +159,7 @@ export default {
       res, message: '成功取得使用者貼文列表', results: posts.length, data: posts,
     })
   }),
+  // GET /posts/getLikeList
   getLikeList: catchAsync(async (req, res) => {
     const likePosts = await Post
       .find({ likes: { $in: [req.user.id] } })
@@ -163,7 +172,23 @@ export default {
       res, message: '成功取得使用者按讚貼文列表', results: likePosts.length, data: likePosts,
     })
   }),
-  // AI 建議寫法
+  // ----------------------------  留言 ----------------------------
+  // GET /posts/:post_id/comments
+  addComment: catchAsync(async (req, res, next) => {
+    const user = req.user.id
+    const post = req.params.post_id
+    const { comment } = req.body
+
+    if (!user || !post || !comment) {
+      return next(new AppError({ statusCode: 400, message: '使用者ID、貼文ID、貼文內容不得為空' }))
+    }
+
+    const newComment = await Comment.create({
+      post, user, comment,
+    })
+    return successHandler({ res, data: { comments: newComment } })
+  }),
+  // 切換按讚狀態 AI 建議寫法
   // toggleLike: catchAsync(async (req, res, next) => {
   //   const { id } = req.params
   //   const post = await Post.findOne({ id })

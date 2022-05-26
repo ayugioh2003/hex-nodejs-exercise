@@ -19,4 +19,7 @@ router.get('/getLikeList', isAuth, postsController.getLikeList)
 // likes
 router.patch('/:post_id/like', isAuth, postsController.toggleLike)
 
+// comments
+router.post('/:post_id/comment', isAuth, postsController.addComment)
+
 export default router

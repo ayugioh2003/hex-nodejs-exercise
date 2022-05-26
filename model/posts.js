@@ -31,13 +31,17 @@ const postsSchema = new mongoose.Schema({
       ref: 'users',
     },
   ],
-  comments: {
-    type: Number,
-    default: 0,
-  },
 }, {
   versionKey: false,
   timestamps: true,
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true },
+})
+
+postsSchema.virtual('comments', {
+  ref: 'comments',
+  foreignField: 'post',
+  localField: '_id',
 })
 
 const posts = mongoose.model(
