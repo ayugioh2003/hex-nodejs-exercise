@@ -44,6 +44,16 @@ usersSchema.virtual('posts', {
   localField: '_id',
   foreignField: 'user',
 })
+usersSchema.virtual('followers', {
+  ref: 'followers',
+  localField: '_id',
+  foreignField: 'following',
+})
+usersSchema.virtual('following', {
+  ref: 'followers',
+  localField: '_id',
+  foreignField: 'follower',
+})
 
 const users = mongoose.model(
   'users',

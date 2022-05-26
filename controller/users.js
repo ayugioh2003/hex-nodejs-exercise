@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs'
 // models
 import User from '../model/users.js'
 import '../model/posts.js'
+import Follower from '../model/followers.js'
 
 // utils
 import { successHandler } from '../utils/responseHandler.js'
@@ -17,7 +18,8 @@ dotenv.config({ path: '.env' })
 export default {
   // GET /users
   getUsers: catchAsync(async (req, res) => {
-    const usersDoc = await User.find().populate('posts', 'postsCount').exec()
+    const usersDoc = await User.find()
+      .populate('posts').populate('postsCount').exec()
     successHandler({ res, data: usersDoc })
   }),
   // POST /users
@@ -131,7 +133,20 @@ export default {
   }),
   // GET /users/profile
   getUser: catchAsync(async (req, res) => {
-    const usersDoc = await User.findOne({ _id: req.user.id }).populate('posts').exec()
+    const usersDoc = await User.findOne({ _id: req.user.id })
+      .populate('posts')
+      .populate({ path: 'followers', select: 'follower' })
+      .populate({ path: 'following', select: 'following' })
+      .exec()
+    successHandler({ res, data: usersDoc })
+  }),
+  // GET /users/:user_id
+  getUserById: catchAsync(async (req, res) => {
+    const usersDoc = await User.findOne({ _id: req.params.user_id })
+      .populate('posts')
+      .populate({ path: 'followers', select: 'follower' })
+      .populate({ path: 'following', select: 'following' })
+      .exec()
     successHandler({ res, data: usersDoc })
   }),
   // PATCH /users/profile
@@ -144,5 +159,95 @@ export default {
     )
     successHandler({ res, data: userDoc })
   }),
+  // ----------- 追蹤清單 ------------
+  toggleFollowing: catchAsync(async (req, res, next) => {
+    // 欄位處理
+    if (req.params.user_id === req.user.id) {
+      return next(new AppError({ statusCode: 400, message: '不可追蹤自己' }))
+    }
+    if (!req.params.user_id) {
+      return next(new AppError({ statusCode: 400, message: '想要處理的追蹤對象不存在' }))
+    }
+    const followingUserDoc = await User.findOne({ _id: req.params.user_id })
+    if (!followingUserDoc) {
+      return next(new AppError({ statusCode: 400, message: '想要處理的追蹤對象不存在' }))
+    }
+
+    const followDoc = await Follower.findOne({
+      follower: req.user.id,
+      following: req.params.user_id,
+    })
+
+    if (!followDoc) {
+      const followRes = await Follower.create({
+        follower: req.user.id,
+        following: req.params.user_id,
+      })
+      console.log('followRes', followRes)
+      if (!followRes) {
+        return next(new AppError({ statusCode: 400, message: '追蹤失敗' }))
+      }
+      return successHandler({ res, message: '成功追蹤', data: followRes })
+    }
+    const followRes = await Follower.findOneAndDelete({
+      follower: req.user.id,
+      following: req.params.user_id,
+    })
+    if (!followRes) {
+      return next(new AppError({ statusCode: 400, message: '取消追蹤失敗' }))
+    }
+    return successHandler({ res, message: '成功取消追蹤', data: followRes })
+  }),
+  getFollowers: catchAsync(async (req, res) => {
+    // 關注目前使用者的人 (追蹤者、粉絲)
+    const followersDoc = await Follower
+      .find({ following: req.user.id }, 'follower following')
+      .populate('follower', 'name photo').exec()
+
+    // 目前使用者關注的人 (追蹤名單)
+    const followingDoc = await Follower
+      .find({ follower: req.user.id })
+      .populate('following', 'name photo').exec()
+
+    successHandler({
+      res,
+      data: {
+        followers: followersDoc.map((record) => record.follower),
+        following: followingDoc.map((record) => record.following),
+      },
+    })
+  }),
+  getFollowersByID: catchAsync(async (req, res) => {
+    // 關注目前使用者的人 (追蹤者、粉絲)
+    const followersDoc = await Follower
+      .find({ following: req.params.user_id }, 'follower following')
+      .populate('follower', 'name photo').exec()
+
+    // 目前使用者關注的人 (追蹤名單)
+    const followingDoc = await Follower
+      .find({ follower: req.params.user_id })
+      .populate('following', 'name photo').exec()
+
+    successHandler({
+      res,
+      data: {
+        followers: followersDoc.map((record) => record.follower),
+        following: followingDoc.map((record) => record.following),
+      },
+    })
+  }),
+  // AI 推薦寫法
+  // toggleFolloweing: catchAsync(async (req, res) => {
+  //   const { userId } = req.params
+  //   const user = await User.findById(req.user.id)
+  //   const isFollowing = user.following.includes(userId)
+  //   if (isFollowing) {
+  //     user.following = user.following.filter((id) => id !== userId)
+  //   } else {
+  //     user.following.push(userId)
+  //   }
+  //   await user.save()
+  //   successHandler({ res, data: user })
+  // }),
 
 }
