@@ -58,6 +58,25 @@ export default {
 
     return successHandler({ res, data: postDoc })
   }),
+  // GET /posts/:id
+  getPost: catchAsync(async (req, res, next) => {
+    // 取得資料: posts 清單與篩選
+    const postsDoc = await Post.findOne({ _id: req.params.post_id })
+      .populate({
+        path: 'user',
+        select: 'name photo',
+      })
+      .populate({
+        path: 'likes',
+        select: 'name photo',
+      })
+      .populate({
+        path: 'comments',
+        select: 'comment user createdAt',
+      })
+      .exec()
+    return successHandler({ res, data: postsDoc })
+  }),
   // PATCH /posts/:id
   updatePost: catchAsync(async (req, res, next) => {
     const { content, ...otherData } = req.body
@@ -117,7 +136,7 @@ export default {
     const { toggleType } = req.body
 
     if (!post_id) {
-      return next(new AppError({ statusCode: 400, message: 'post id is emptt' }))
+      return next(new AppError({ statusCode: 400, message: 'post id is empty' }))
     }
 
     if (['add', 'remove'].indexOf(toggleType) === -1) {
@@ -148,6 +167,41 @@ export default {
       }
       return successHandler({ res, message: '成功取消讚', data: toggleRes })
     }
+  }),
+  like: catchAsync(async (req, res, next) => {
+    const { post_id } = req.params
+
+    if (!post_id) {
+      return next(new AppError({ statusCode: 400, message: 'post id is empty' }))
+    }
+
+    const likeRes = await Post.findOneAndUpdate(
+      { _id: post_id },
+      { $addToSet: { likes: req.user.id } },
+      { returnDocument: 'after', runValidators: true },
+    )
+    if (!likeRes) {
+      return next(new AppError({ statusCode: 400, message: '按讚失敗' }))
+    }
+    console.log('toggleRes', likeRes)
+    return successHandler({ res, message: '成功按讚', data: likeRes })
+  }),
+  unlike: catchAsync(async (req, res, next) => {
+    const { post_id } = req.params
+
+    if (!post_id) {
+      return next(new AppError({ statusCode: 400, message: 'post id is empty' }))
+    }
+
+    const likeRes = await Post.findOneAndUpdate(
+      { _id: post_id },
+      { $pull: { likes: req.user.id } },
+      { returnDocument: 'after', runValidators: true },
+    )
+    if (!likeRes) {
+      return next(new AppError({ statusCode: 400, message: '取消讚失敗' }))
+    }
+    return successHandler({ res, message: '成功取消讚', data: likeRes })
   }),
   // ---------------------------- 列表 ----------------------------
   // GET /posts/user/:post_id
