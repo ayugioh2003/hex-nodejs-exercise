@@ -5,6 +5,8 @@ import { isAuth } from '../service/auth.js'
 
 const router = express.Router()
 
+router.post('/', isAuth, uploadModule.single('image'), uploadController.uploadImageToAlbum)
+
 router.get('/images', uploadController.getImages)
 
 router.post('/image', isAuth, uploadModule.single('image'), uploadController.uploadImage)

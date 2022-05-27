@@ -35,7 +35,7 @@ export default {
   // POST /upload/imageToAlbum
   uploadImageToAlbum: catchAsync(async (req, res, next) => {
     if (!req.file) {
-      return next(new AppError({ statusCode: 400, error: '尚未上傳檔案' }))
+      return next(new AppError({ statusCode: 400, message: '尚未上傳檔案' }))
     }
 
     // const dimensions = sizeOf(req.files[0].buffer)
