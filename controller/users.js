@@ -198,6 +198,68 @@ export default {
     }
     return successHandler({ res, message: '成功取消追蹤', data: followRes })
   }),
+  follow: catchAsync(async (req, res, next) => {
+    // 欄位處理
+    if (req.params.user_id === req.user.id) {
+      return next(new AppError({ statusCode: 400, message: '不可追蹤自己' }))
+    }
+    if (!req.params.user_id) {
+      return next(new AppError({ statusCode: 400, message: '想要處理的追蹤對象不存在' }))
+    }
+    const followingUserDoc = await User.findOne({ _id: req.params.user_id })
+    if (!followingUserDoc) {
+      return next(new AppError({ statusCode: 400, message: '想要處理的追蹤對象不存在' }))
+    }
+
+    const followDoc = await Follower.findOne({
+      follower: req.user.id,
+      following: req.params.user_id,
+    })
+
+    if (!followDoc) {
+      const followRes = await Follower.create({
+        follower: req.user.id,
+        following: req.params.user_id,
+      })
+      console.log('followRes', followRes)
+      if (!followRes) {
+        return next(new AppError({ statusCode: 400, message: '追蹤失敗' }))
+      }
+      return successHandler({ res, message: '成功追蹤', data: followRes })
+    }
+    return successHandler({ res, message: '已追蹤' })
+  }),
+  unfollow: catchAsync(async (req, res, next) => {
+    // 欄位處理
+    if (req.params.user_id === req.user.id) {
+      return next(new AppError({ statusCode: 400, message: '不可追蹤/取消追蹤自己' }))
+    }
+    if (!req.params.user_id) {
+      return next(new AppError({ statusCode: 400, message: '想要處理的追蹤對象不存在' }))
+    }
+    const followingUserDoc = await User.findOne({ _id: req.params.user_id })
+    if (!followingUserDoc) {
+      return next(new AppError({ statusCode: 400, message: '想要處理的追蹤對象不存在' }))
+    }
+
+    const followDoc = await Follower.findOne({
+      follower: req.user.id,
+      following: req.params.user_id,
+    })
+
+    if (!followDoc) {
+      return successHandler({ res, message: '已取消追蹤' })
+    }
+
+    const followRes = await Follower.findOneAndDelete({
+      follower: req.user.id,
+      following: req.params.user_id,
+    })
+    if (!followRes) {
+      return next(new AppError({ statusCode: 400, message: '取消追蹤失敗' }))
+    }
+    return successHandler({ res, message: '成功取消追蹤', data: followRes })
+  }),
   getFollowers: catchAsync(async (req, res) => {
     // 關注目前使用者的人 (追蹤者、粉絲)
     const followersDoc = await Follower
