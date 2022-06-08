@@ -75,6 +75,13 @@ export default {
         select: 'comment user createdAt -_id -post',
       })
       .exec()
+
+    if (!postsDoc) {
+      return next(new AppError({
+        statusCode: 400,
+        message: '該貼文不存在',
+      }))
+    }
     return successHandler({ res, data: postsDoc })
   }),
   // PATCH /posts/:id
