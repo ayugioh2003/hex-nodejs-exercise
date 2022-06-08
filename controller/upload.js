@@ -1,4 +1,5 @@
 import imgurPackage from 'imgur'
+import sizeOf from 'image-size'
 import { successHandler } from '../utils/responseHandler.js'
 import catchAsync from '../utils/catchAsync.js'
 import imgur from '../service/imgur.js'
@@ -12,7 +13,7 @@ export default {
     successHandler({ res, data: imageDoc })
   }),
   // POST /upload/image
-  uploadImage: catchAsync(async (req, res, next) => {
+  uploadImage: catchAsync(async (req, res) => {
     // if (!req.file) {
     //   return errorHandler({ res, statusCode: 400, error: '需要有 file' })
     // }
@@ -38,10 +39,12 @@ export default {
       return next(new AppError({ statusCode: 400, message: '尚未上傳檔案' }))
     }
 
-    // const dimensions = sizeOf(req.files[0].buffer)
-    // if (dimensions.width !== dimensions.height) {
-    //   return next(new AppError({ statusCode: 400, error: '圖片長寬不符合 1:1 尺寸。' }))
-    // }
+    if (req.body.type === 'avatar') {
+      const dimensions = sizeOf(req.file.buffer)
+      if (dimensions.width !== dimensions.height) {
+        return next(new AppError({ statusCode: 400, message: '圖片長寬不符合 1:1 尺寸。' }))
+      }
+    }
 
     const client = new imgurPackage.ImgurClient({
       clientId: process.env.IMGUR_CLIENT_ID,

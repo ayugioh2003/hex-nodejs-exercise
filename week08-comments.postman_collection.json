@@ -944,7 +944,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"content\": \"123\",\n    \"image\": \"https://i.imgur.com/vbZfbpM.jpeg\"\n}",
+							"raw": "{\n    \"content\": \"123321 test\",\n    \"image\": \"https://i.imgur.com/vbZfbpM.jpeg\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -964,7 +964,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "628c5a9a0c0e2bcd0fe8e133"
+									"value": "62a018172fac03075706849d"
 								}
 							]
 						}
@@ -1219,7 +1219,12 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "istockphoto-825383494-612x612.jpeg"
+									"src": "/Users/hsulala/Desktop/Screen Shot 2022-05-20 at 1.25.40 PM.png"
+								},
+								{
+									"key": "type",
+									"value": "avatar",
+									"type": "text"
 								}
 							]
 						},
