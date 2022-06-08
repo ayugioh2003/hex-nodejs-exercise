@@ -5,6 +5,7 @@ import AppError from '../utils/appError.js'
 // models
 import Post from '../model/posts.js'
 import Comment from '../model/comments.js'
+import User from '../model/users.js'
 
 export default {
   // ---------------------------- 貼文 ----------------------------
@@ -213,11 +214,20 @@ export default {
   }),
   // ---------------------------- 列表 ----------------------------
   // GET /posts/user/:post_id
-  getUserPosts: catchAsync(async (req, res) => {
+  getUserPosts: catchAsync(async (req, res, next) => {
     const user = req.params.user_id
+
+    const userDoc = await User.findOne({ _id: user })
+    if (!userDoc) {
+      return next(new AppError({
+        statusCode: 404,
+        message: '該使用者不存在',
+      }))
+    }
+
     const posts = await Post.find({ user })
 
-    successHandler({
+    return successHandler({
       res, message: '成功取得使用者貼文列表', results: posts.length, data: posts,
     })
   }),
