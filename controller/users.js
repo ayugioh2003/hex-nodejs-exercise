@@ -170,14 +170,21 @@ export default {
     successHandler({ res, data: usersDoc })
   }),
   // PATCH /users/profile
-  updateUser: catchAsync(async (req, res) => {
-    const { name, photo } = req.body
+  updateUser: catchAsync(async (req, res, next) => {
+    const { name, photo, sex } = req.body
+    if (!name) {
+      return next(new AppError({ statusCode: 400, message: '姓名為必填' }))
+    }
+    if (!sex) {
+      return next(new AppError({ statusCode: 400, message: '性別為必填' }))
+    }
+
     const userDoc = await User.findByIdAndUpdate(
       req.user.id,
-      { name, photo },
+      { name, photo, sex },
       { returnDocument: 'after', runValidators: true },
     )
-    successHandler({ res, data: userDoc })
+    return successHandler({ res, data: userDoc })
   }),
   // ----------- 追蹤清單 ------------
   toggleFollowing: catchAsync(async (req, res, next) => {
