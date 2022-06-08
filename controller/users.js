@@ -67,6 +67,14 @@ export default {
       }))
     }
 
+    const userRes = await User.findOne({ email })
+    if (userRes) {
+      return next(new AppError({
+        statusCode: 400,
+        message: 'Email 已被註冊',
+      }))
+    }
+
     // ---------- 密碼加密 --------------
     password = await bcrypt.hash(req.body.password, 12)
 
