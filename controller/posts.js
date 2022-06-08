@@ -46,7 +46,7 @@ export default {
   // POST /posts
   addPosts: catchAsync(async (req, res, next) => {
     const { content, ...otherData } = req.body
-    if (!content) {
+    if (!content.trim()) {
       return next(new AppError({
         statusCode: 400,
         message: '內容不得為空',
@@ -54,7 +54,7 @@ export default {
     }
 
     // 新增貼文
-    const postDoc = await Post.create({ content, ...otherData, user: req.user.id })
+    const postDoc = await Post.create({ content: content.trim(), ...otherData, user: req.user.id })
 
     return successHandler({ res, data: postDoc })
   }),
