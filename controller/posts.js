@@ -114,7 +114,7 @@ export default {
   // DELETE /posts/:id
   deletePost: catchAsync(async (req, res, next) => {
     const id = req.params.post_id
-    const data = await Post.findOneAndDelete({ id, user: req.user.id })
+    const data = await Post.findOneAndDelete({ _id: id, user: req.user.id })
 
     if (!id || !data) {
       return next(new AppError({
