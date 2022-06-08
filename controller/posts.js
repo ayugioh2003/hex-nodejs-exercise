@@ -95,9 +95,10 @@ export default {
     }
 
     const id = req.params.post_id
+    console.log('id', id)
 
     const post = await Post.findOneAndUpdate(
-      { id, user: req.user.id },
+      { _id: id, user: req.user.id },
       { content, ...otherData },
       { returnDocument: 'after', runValidators: true },
     )
