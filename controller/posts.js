@@ -237,6 +237,11 @@ export default {
       return next(new AppError({ statusCode: 400, message: '使用者ID、貼文ID、貼文內容不得為空' }))
     }
 
+    const postRes = await Post.findOne({ _id: post })
+    if (!postRes) {
+      return next(new AppError({ statusCode: 400, message: '此篇貼文不存在' }))
+    }
+
     const newComment = await Comment.create({
       post, user, comment,
     })

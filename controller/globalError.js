@@ -49,6 +49,11 @@ export default (err, req, res, next) => {
   }
 
   // mongoose
+  if (err.name === 'CastError') {
+    err.message = '資料ID格式錯誤'
+    err.isOperational = true
+    return resErrorPro(err, res)
+  }
   if (err.name === 'ValidationError') {
     err.message = '資料欄位未填寫正確'
     err.isOperational = true
