@@ -26,7 +26,7 @@ export default {
       })
       .populate({
         path: 'comments',
-        select: 'comment user createdAt',
+        select: 'comment user createdAt -_id -post',
       })
       .sort(timeSort)
       .exec()
@@ -72,7 +72,7 @@ export default {
       })
       .populate({
         path: 'comments',
-        select: 'comment user createdAt',
+        select: 'comment user createdAt -_id -post',
       })
       .exec()
     return successHandler({ res, data: postsDoc })
