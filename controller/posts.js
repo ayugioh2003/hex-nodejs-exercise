@@ -136,11 +136,11 @@ export default {
     const { toggleType } = req.body
 
     if (!post_id) {
-      return next(new AppError({ statusCode: 400, message: 'post id is empty' }))
+      return next(new AppError({ statusCode: 400, message: '貼文 ID 為必填' }))
     }
 
     if (['add', 'remove'].indexOf(toggleType) === -1) {
-      return next(new AppError({ statusCode: 400, message: 'toggleType is invalid' }))
+      return next(new AppError({ statusCode: 400, message: 'toggleType 只能填入 [add, remove]' }))
     }
 
     if (toggleType === 'add') {
@@ -150,7 +150,7 @@ export default {
         { returnDocument: 'after', runValidators: true },
       )
       if (!toggleRes) {
-        return next(new AppError({ statusCode: 400, message: '按讚失敗' }))
+        return next(new AppError({ statusCode: 400, message: '按讚失敗。貼文 ID 不存在或是尚未按該貼文讚' }))
       }
       console.log('toggleRes', toggleRes)
       return successHandler({ res, message: '成功按讚', data: toggleRes })
@@ -163,7 +163,7 @@ export default {
         { returnDocument: 'after', runValidators: true },
       )
       if (!toggleRes) {
-        return next(new AppError({ statusCode: 400, message: '取消讚失敗' }))
+        return next(new AppError({ statusCode: 400, message: '取消讚失敗。貼文 ID 不存在或是已經按該貼文讚' }))
       }
       return successHandler({ res, message: '成功取消讚', data: toggleRes })
     }
@@ -181,7 +181,7 @@ export default {
       { returnDocument: 'after', runValidators: true },
     )
     if (!likeRes) {
-      return next(new AppError({ statusCode: 400, message: '按讚失敗' }))
+      return next(new AppError({ statusCode: 400, message: '按讚失敗。貼文 ID 不存在或是尚未按該貼文讚' }))
     }
     console.log('toggleRes', likeRes)
     return successHandler({ res, message: '成功按讚', data: likeRes })
@@ -199,7 +199,7 @@ export default {
       { returnDocument: 'after', runValidators: true },
     )
     if (!likeRes) {
-      return next(new AppError({ statusCode: 400, message: '取消讚失敗' }))
+      return next(new AppError({ statusCode: 400, message: '取消讚失敗。貼文 ID 不存在或是已經按該貼文讚' }))
     }
     return successHandler({ res, message: '成功取消讚', data: likeRes })
   }),
