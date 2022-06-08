@@ -61,6 +61,9 @@ export default {
     if (password !== confirmPassword) {
       errors.push('密碼不一致')
     }
+    if (!validator.isLength(name, { min: 2 })) {
+      errors.push('暱稱至少兩個字元')
+    }
     if (!checkPassword(password)) {
       errors.push('密碼需包含至少一數字、一英文字母、八字元')
     }
