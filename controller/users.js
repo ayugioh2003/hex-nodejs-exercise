@@ -13,6 +13,15 @@ import catchAsync from '../utils/catchAsync.js'
 import AppError from '../utils/appError.js'
 import { generateSendJWT } from '../service/auth.js'
 
+// function
+function checkPassword(password) {
+  // 至少一數字、至少一英文字母、至少八字元
+  const re = /^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/
+  const result = re.test(password)
+
+  return result
+}
+
 dotenv.config({ path: '.env' })
 
 export default {
@@ -52,8 +61,8 @@ export default {
     if (password !== confirmPassword) {
       errors.push('密碼不一致')
     }
-    if (!validator.isLength(password, { min: 8 })) {
-      errors.push('密碼字數低於 8 碼')
+    if (!checkPassword(password)) {
+      errors.push('密碼需包含至少一數字、一英文字母、八字元')
     }
     if (!validator.isEmail(email)) {
       errors.push('Email 格式不正確')
@@ -129,6 +138,9 @@ export default {
     }
     if (password !== confirmPassword) {
       return next(new AppError({ statusCode: 400, message: '密碼不相符' }))
+    }
+    if (!checkPassword(password)) {
+      return next(new AppError({ statusCode: 400, message: '密碼需至少一數字、一英文字符、八字元' }))
     }
     const newPassword = await bcrypt.hash(password, 12)
 
