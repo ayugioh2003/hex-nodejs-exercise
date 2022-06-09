@@ -1,0 +1,1248 @@
+{
+	"info": {
+		"_postman_id": "c3015248-eeaa-4da8-bc38-3b31c48e9775",
+		"name": "week08-comments",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9637148"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "1. users/sign_up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"aaaa@gmail.com\",\n    \"password\": \"aaaaaaaa\",\n    \"confirmPassword\": \"aaaaaaaa\",\n    \"name\": \"aaaa\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/users/sign_up",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"sign_up"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. users/sign_in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set('accessToken', pm.response.json().data.user.token)",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"dddd@gmail.com\",\n    \"password\": \"dddddddd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/users/sign_in",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"sign_in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. users/updatePassword",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"bbbb\",\n    \"confirmPassword\": \"bbbb\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/users/updatePassword",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"updatePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. users/profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/users/profile",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. users/profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"bbbb\",\n    \"photo\": \"bbbphoto\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/users/profile",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/users",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{accessToken}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "hhh@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "hhh",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "hhh",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "hhh",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/users",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/:user_id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/users/:user_id",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "6274946448229b33fe081571"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "like/follow",
+			"item": [
+				{
+					"name": "1. users/:user_id/follow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"toggleType\": \"add\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/users/:user_id/follow",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":user_id",
+								"follow"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "628b4f920624dca3ebc8aac9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. /users/:user_id/unfollow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"toggleType\": \"add\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/users/:user_id/unfollow",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":user_id",
+								"unfollow"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "628b4f920624dca3ebc8aac9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. posts/getLikeList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{week08-API}}/api/posts/getLikeList",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"getLikeList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. users/followering",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{week08-API}}/api/users/following",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"following"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users/:user_id/followers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{week08-API}}/api/users/:user_id/followers",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":user_id",
+								"followers"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "6274946448229b33fe081571"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/:user_id/follow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"toggleType\": \"add\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/users/:user_id/follow",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":user_id",
+								"follow"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "628b4f920624dca3ebc8aac9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users/followers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{week08-API}}/api/users/followers",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"followers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "1. posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/posts?q=&sort=oldest",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": ""
+								},
+								{
+									"key": "sort",
+									"value": "oldest"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. posts/:posts_id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/posts/:post_id",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":post_id"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "oldest",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "post_id",
+									"value": "628de493597962feef479fc3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_id",
+									"value": "6274947248229b33fe081573",
+									"description": "輸入 user_id，不填入預設抓第一個人的 user_id",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "content",
+									"value": "test3",
+									"description": "必填",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "person",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/posts",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. posts/:post_id/like",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"toggleType\": \"add\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/posts/:post_id/like",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":post_id",
+								"like"
+							],
+							"variable": [
+								{
+									"key": "post_id",
+									"value": "628de5c1965c199c6bf912f0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. posts/:post_id/unlike",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"toggleType\": \"add\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/posts/:post_id/like",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":post_id",
+								"like"
+							],
+							"variable": [
+								{
+									"key": "post_id",
+									"value": "628de5c1965c199c6bf912f0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. posts/:id/comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\": \"comment test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/posts/:post_id/comment",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":post_id",
+								"comment"
+							],
+							"variable": [
+								{
+									"key": "post_id",
+									"value": "628de493597962feef479fc3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7. /posts/user/:user_id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{week08-API}}/api/posts/user/:user_id",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"user",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "628b4f920624dca3ebc8aac9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/posts/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"123321 test\",\n    \"image\": \"https://i.imgur.com/vbZfbpM.jpeg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/posts/:id",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62a018172fac03075706849d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/posts/ :id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"我的耳朵呢 RRR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/posts/:id",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "628b4fb85ee07cf83dded422"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"我的耳朵呢 RRR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/posts",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/posts/:post_id/like",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"toggleType\": \"add\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/posts/:post_id/like",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":post_id",
+								"like"
+							],
+							"variable": [
+								{
+									"key": "post_id",
+									"value": "628de5c1965c199c6bf912f0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "upload",
+			"item": [
+				{
+					"name": "1. upload",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Chiu/Pictures/Saved Pictures/粉專/5466631.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/upload",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload/images",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{week08-API}}/api/upload/images",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"upload",
+								"images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload/image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "download.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/upload/image",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"upload",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload/imageToAlbum",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/hsulala/Desktop/Screen Shot 2022-05-20 at 1.25.40 PM.png"
+								},
+								{
+									"key": "type",
+									"value": "avatar",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{week08-API}}/api/upload/imageToAlbum",
+							"host": [
+								"{{week08-API}}"
+							],
+							"path": [
+								"api",
+								"upload",
+								"imageToAlbum"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
